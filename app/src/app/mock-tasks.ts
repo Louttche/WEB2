@@ -1,4 +1,6 @@
-export const TASKS: string[] = [
+import { Task } from './task';
+
+export const TASKS: Task[] = [
     { id: 1, name: 'Task 1' },
     { id: 2, name: 'Task 2' },
     { id: 3, name: 'Task 3' },
