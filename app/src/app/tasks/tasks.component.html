@@ -1,7 +1,39 @@
-<h3>My Tasks</h3>
-<ul>
-   <li *ngFor='let task of tasks'>
-       ID: {{task.id}} <br>
-       NAME: {{task.name | uppercase}}
+<h2>My Tasks</h2>
+<ul class="tasks">
+   <li *ngFor='let task of tasks'
+        [class.selected]="task === selectedTask"
+        (click)="onSelect(task)">
+        <span class="badge">{{task.id}} </span> {{task.name | uppercase}}:
+        <span *ngIf='task === selectedTask'>
+            {{task.description}}
+        </span>
    </li>
 </ul>
+
+<div *ngIf='selectedTask'
+    (click)="onDelete(selectedTask)">
+    <button class="button"> Delete Task </button>
+</div>
+
+<form [formGroup]="TaskInfoForm"
+(ngSubmit)="onCreate(TaskInfoForm.value)">
+
+    <div>
+        <p>Fill in and press on the 'Create' button to add a new task!</p>
+
+        <label for="name">
+            Name
+        </label>
+        <input id="name" type="text" formControlName="name">
+    </div>
+    <br>
+    <div>
+        <label for="description">
+            Description
+        </label>
+        <input id="description" type="text" formControlName="description">
+    </div>
+    <br>
+
+    <button class="button" type="submit"> Create </button>
+</form>
