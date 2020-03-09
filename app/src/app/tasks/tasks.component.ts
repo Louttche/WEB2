@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { TASKS } from '../mock-tasks';
 import { Task } from '../task';
 
@@ -16,7 +16,7 @@ export class TasksComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.TaskInfoForm = this.formBuilder.group({
-      name: '',
+      name: ['', [Validators.required]],
       description: ''
     });
   }
@@ -32,7 +32,7 @@ export class TasksComponent implements OnInit {
 
   sortTasksID(): void{
     for (let i = 0; i < this.tasks.length; i++) {
-      this.tasks[i].id = i + 1;      
+      this.tasks[i].id = i + 1;     
     }
   }
 
@@ -47,6 +47,7 @@ export class TasksComponent implements OnInit {
       this.tasks.splice(task.id - 1, 1);
     }
     console.log('Deleted task')
+    this.selectedTask = null;
     this.sortTasksID();
   }
 

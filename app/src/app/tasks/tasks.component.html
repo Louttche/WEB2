@@ -11,8 +11,8 @@
 </ul>
 
 <div *ngIf='selectedTask'>
-    <button (click)="onDelete(selectedTask)"> Delete Task </button>
-    <button (click)="onUpdate(selectedTask, TaskInfoForm.value)"> Update Task </button>
+    <button (click)="onDelete(selectedTask)" [disabled]="!selectedTask"> Delete Task </button>
+    <button (click)="onUpdate(selectedTask, TaskInfoForm.value)" [disabled]="TaskInfoForm.invalid"> Update Task </button>
 </div>
 
 <form [formGroup]="TaskInfoForm"
@@ -35,5 +35,5 @@
     </div>
     <br>
 
-    <button type="submit"> Create </button>
+    <button type="submit" [disabled]="TaskInfoForm.invalid"> Create </button>
 </form>
