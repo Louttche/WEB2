@@ -1,6 +1,29 @@
-<h2>My employees</h2>
-<ul class = "employees">
-    <li *ngFor = "let employee of employees">
-        <p>Id: {{employee.id}} Name:{{employee.name | uppercase}}</p>
-    </li>
+<h2>My Employees</h2>
+<ul class="employees">
+   <li *ngFor='let employee of employees'
+        [class.selected]="employee === selectedEmployee"
+        (click)="onSelect(employee)">
+        <span class="badge">{{employee.id}} </span> {{employee.name | uppercase}}
+   </li>
 </ul>
+
+<div *ngIf='selectedEmployee'>
+    <button (click)="onDelete(selectedEmployee)" [disabled]="!selectedEmployee"> Delete Employee </button>
+    <button (click)="onUpdate(selectedEmployee, EmployeeInfoForm.value)" [disabled]="EmployeeInfoForm.invalid"> Update Employee </button>
+</div>
+
+<form [formGroup]="EmployeeInfoForm"
+(ngSubmit)="onCreate(EmployeeInfoForm.value)">
+
+    <div>
+        <p>Fill in the form and press on the 'Create' button to add a new employee, <br> Or the 'Update' button to update the information of the selected employee!</p>
+
+        <label for="name">
+            Name
+        </label>
+        <input id="name" type="text" formControlName="name">
+    </div>
+    <br>
+
+    <button type="submit" [disabled]="EmployeeInfoForm.invalid"> Create </button>
+</form>
