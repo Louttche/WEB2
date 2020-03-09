@@ -10,16 +10,16 @@
    </li>
 </ul>
 
-<div *ngIf='selectedTask'
-    (click)="onDelete(selectedTask)">
-    <button class="button"> Delete Task </button>
+<div *ngIf='selectedTask'>
+    <button (click)="onDelete(selectedTask)"> Delete Task </button>
+    <button (click)="onUpdate(selectedTask, TaskInfoForm.value)"> Update Task </button>
 </div>
 
 <form [formGroup]="TaskInfoForm"
 (ngSubmit)="onCreate(TaskInfoForm.value)">
 
     <div>
-        <p>Fill in and press on the 'Create' button to add a new task!</p>
+        <p>Fill in the form and press on the 'Create' button to add a new task, <br> Or the 'Update' button to update the information of the selected task!</p>
 
         <label for="name">
             Name
@@ -35,5 +35,5 @@
     </div>
     <br>
 
-    <button class="button" type="submit"> Create </button>
+    <button type="submit"> Create </button>
 </form>
