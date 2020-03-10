@@ -1,0 +1,74 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="btn btn-outline-light" routerLink="/dashboard">Dashboard</a>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/task">Tasks <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link active" routerLink="/department">Departments</a>
+        <a class="nav-item nav-link" routerLink="">Employees</a>
+      </div>
+    </div>
+  </nav>
+  <div class="container pb-3 mt-3">
+    <div class="card bg-secondary">
+      <div class="card-heading bg-dark text-white">
+      <div class="row pt-4">
+          <div class="col-sm">
+              <h2 class="text-center">The Departments</h2>
+            </div>
+      </div>
+      </div>
+      <div class="card-body">
+      <div class="row align-items-center">
+          <div class="col">
+          <div class="border-right border-dark">  
+            <a class="btn btn-outline-success" routerLink="/add-department" role="button">Add a new Department</a>
+          </div>
+          </div>
+          <div class="col-6">
+              <div class="border-right border-dark">
+              <div class="input-group">
+                <span class="input-group-append">
+                    <div class="input-group-text bg-white border-right-0 rounded-left">
+                    <fa-icon [icon]="faSearch"></fa-icon>
+                    </div>
+                </span>
+              <input class="form-control py-2 border-left-0 mr-4" type="text" name="search" [(ngModel)]="searchText"
+               autocomplete="off" placeholder="Search by ID, name, location or employees no.">
+              </div>
+              </div>
+            </div>
+      <div class="col">
+          <div class="float-sm-right">
+            <form [formGroup]='deleteFormGroup' (ngSubmit)='deleteDepartment()' style="display: inline;">
+            <button *ngIf="selectedDepartment" class="btn btn-info" style="background-color: red;" type="submit"
+            onclick="if(!confirm('Are you sure you want to delete this item?')) {return false}">X</button>
+            </form>
+            <span class="badge badge-info">
+              <label *ngIf="!selectedDepartment">Please select an item in order to delete it</label>
+            </span>
+          </div>
+      </div>
+      </div>
+      </div>
+      <div class="card-footer bg-light border-secondary">
+      <div class="row pt-3">
+          <div class="col-sm">
+            <button class="btn btn-info mb-2" (click)="SortListByName()">Sort By Name</button>
+            <button class="btn btn-info mb-2 ml-2" (click)="SortListByID()">Sort By ID</button>
+            <ul class="list-group" role="tablist">
+            <li class="list-group-item list-group-item-action" *ngFor="let department of departments | filter:searchText" [ngClass]="{'active': selectedDepartment == department}"
+            [class.selected]="department === selectedDepartment"
+            (click)="onSelect(department)" >
+              <a routerLink="/departmentdetail/{{department.id}}">
+                <span class="badge" style="color: black">{{department.id}}</span> <span style="color: black">{{department.name}}</span>
+              </a>
+            </li>
+            </ul>
+            <p class="card-text">
+                <small class="text-muted">To see and edit the details of a department, click on its name.</small>
+              </p>
+          </div>
+      </div>
+      </div>
+  </div>
+  </div>

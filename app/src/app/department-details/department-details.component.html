@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" routerLink="/dashboard">Dashboard</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/task">Tasks <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" routerLink="/department">Departments</a>
+      <a class="nav-item nav-link" routerLink="">Employees</a>
+    </div>
+  </div>
+</nav>
+
+<div *ngIf="department">
+<div class="container">
+  <div class="row pt-4">
+  <div class="col-sm text-center">
+  <div class="card text-white bg-secondary mx-auto" style="width: 18rem;">
+    <div class="card-header bg-dark">
+      ID: {{department.id}}
+    </div>
+  <div class="card-body">
+      <form [formGroup]='departmentFormGroup' (ngSubmit)='updateDepartment()' #form1="ngForm">
+      <div [hidden]="form1.submitted">
+        <div class="form-group">
+          <label><h5>Name:</h5>
+            <input id="name" class="form-control" type="text" formControlName="name" value="{{department.name}}" required>
+          </label>
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+            <div *ngIf="name.errors.required">Name is required.</div>
+          </div>
+        </div>
+        <div class="form-group">
+        <label><h5>Location:</h5>
+          <input id="location" class="form-control" type="text" formControlName="location" value="{{department.location}}" required>
+        </label>
+        <div *ngIf="location.invalid && (location.dirty || location.touched)" class="alert alert-danger">
+          <div *ngIf="location.errors.required">Location is required.</div>
+        </div>
+        </div>
+        <div class="form-group">
+          <label><h5>No. Of Employees:</h5>
+            <input id="numberOfEmployees" class="form-control" type="number" formControlName="numberOfEmployees" value="{{department.numberOfEmployees}}" required>
+          </label>
+          <div *ngIf="numberOfEmployees.invalid && (numberOfEmployees.dirty || numberOfEmployees.touched)" class="alert alert-danger">
+            <div *ngIf="numberOfEmployees.errors.required">The no. of employees is required.</div>
+          </div>
+        </div>
+        <button class= 'btn btn-info' type="submit" [disabled]="departmentFormGroup.invalid">Update Department</button>
+      </div>
+      </form>
+      <div *ngIf="form1.submitted">
+          <span class="badge badge-success text-wrap">
+            <h5>Your department, {{ department.name }}, has been updated!</h5>
+            </span><br><br>
+          <button class='btn btn-info' (click)="backClicked()">Back to departments</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+</div>
+</div>
+ 
