@@ -1,3 +1,9 @@
-<app-tasks></app-tasks>
-<app-employees></app-employees>
-<app-departments></app-departments>
+<h1> {{title}}</h1>
+<nav>
+    <a routerLink="/home" routerLinkActive="active"> Home </a>
+    <a routerLink="/tasks" routerLinkActive="active"> Tasks </a>
+    <a routerLink="/employees" routerLinkActive="active"> Employees </a>
+    <!-- <a routerLink="/departments" routerLinkActive="active"> Departments </a> -->
+</nav>
+
+<router-outlet *ngIf="this.router.url != '/home'"></router-outlet>

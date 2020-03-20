@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import { RouterModule } from '@angular/router';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { AppComponent } from './app.component';
@@ -11,22 +10,28 @@ import { TasksComponent } from './tasks/tasks.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { DepartmentsComponent } from './departments/departments.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TaskDetailsComponent } from './task-details/task-details.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     TasksComponent,
     EmployeesComponent,
-    DepartmentsComponent
+    DepartmentsComponent,
+    TaskDetailsComponent,
+    PageNotFoundComponent
   ],
+
   imports: [
     BrowserModule,
     FontAwesomeModule,
-    RouterModule,
     Ng2SearchPipeModule,
     FormsModule,
     ReactiveFormsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
