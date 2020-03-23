@@ -13,7 +13,7 @@ const appRoutes: Routes = [
   {path: 'home', component: AppComponent},
   {path: 'tasks', component: TasksComponent},
   {path: 'employees', component: EmployeesComponent},
-  {path: 'task/:id', component: TaskDetailsComponent},
+  {path: 'tasks/:id', component: TaskDetailsComponent},
   {path: '', component: AppComponent},
   {path: '**', component: PageNotFoundComponent}
 ]

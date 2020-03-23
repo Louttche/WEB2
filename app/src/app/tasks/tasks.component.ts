@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { TASKS } from '../mock-tasks';
+import { TaskService } from '../task.service';
+//import { DepartmentService } from '../department.service';
+import { Department } from '../department';
+//import { EmployeeService } from '../employee.service';
+import { EMPLOYEES } from '../mock-employees';
 import { Task } from '../task';
 
 @Component({
@@ -9,22 +13,40 @@ import { Task } from '../task';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
-  tasks = TASKS;
+  tasks: Task[];
+  employees = EMPLOYEES;
+  //departments: department[];
+  selectedTask: Task;
   TaskInfoForm;
+  show: boolean = false;
+  createButton:any;
 
-  constructor(
-    private formBuilder: FormBuilder
-  ) {
-    this.TaskInfoForm = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      description: ''
-    });
+  constructor(private formBuilder: FormBuilder, private taskService: TaskService/*, private departmentService: DepartmentService*/) {
+      this.TaskInfoForm = this.formBuilder.group({
+        name: '', //[Validators.required]
+        description: '',
+        department: Department,
+        employees: null,
+        deadline: null
+      });
   }
 
   ngOnInit(): void {
+    this.getTasks();    
+    //this.getDepartments();
   }
 
-  selectedTask: Task;
+  ngDoCheck(): void {
+    //console.log(this.show);
+  }
+
+  getTasks(): void{
+    this.taskService.getTasks().subscribe(tasks => this.tasks = tasks, err => console.log("error getting mock-tasks."));
+  }
+
+  /*getDepartments(): void{
+    this.departmentService.getDepartments().subscribe(departments => this.departments = departments);
+  }*/
 
   onSelect(task: Task): void {
     this.selectedTask = task;
@@ -37,7 +59,7 @@ export class TasksComponent implements OnInit {
   }
 
   onCreate(taskDetails) {
-    this.tasks.push({name: taskDetails.name, description: taskDetails.description, id: this.tasks.length + 1});
+    this.tasks.push({name: taskDetails.name, description: taskDetails.description, id: this.tasks.length + 1, department: /*getDepartmentByName(taskDetails.department)*/taskDetails.department, employees: taskDetails.employees, deadline: taskDetails.deadline});
     this.TaskInfoForm.reset();
     this.sortTasksID();
   }
@@ -51,11 +73,10 @@ export class TasksComponent implements OnInit {
     this.sortTasksID();
   }
 
-  onUpdate(task: Task, taskDetails){
-      var index = this.tasks.findIndex(task => task === this.selectedTask);
-      this.tasks[index].name = taskDetails.name;
-      this.tasks[index].description = taskDetails.description;
-      this.TaskInfoForm.reset();
-      this.sortTasksID();
+  toggle(){
+    this.show = !this.show;
+
+    if (this.show)
+      this.createButton
   }
 }

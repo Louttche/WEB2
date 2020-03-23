@@ -1,1 +1,38 @@
-<p>Task Details</p>
+<div *ngIf="task$ | async as task">
+    <h3>{{ task.name }} Details</h3>
+    <div>
+      <label>Id: {{ task.id }}</label>
+      <br>
+      <label>Name: {{ task.name }}</label>
+      <br>
+      <label>Description: {{ task.description }}</label>
+      <br>
+      <label *ngIf="this.task.department != null">Department: {{ task.department.name }}</label>
+      <br>
+      <label>Assigned to: </label>
+      <ul>
+          <li **ngFor="let e of this.employees"> {{e.name}} </li>
+      </ul>
+      <br>
+      <label>To be done before: {{ task.deadline |  date }}</label>
+    </div>
+    <br>
+    
+    <h3>Make Changes</h3>
+    <form [formGroup]="UpdateForm">
+        <div>
+            <label for="name"> Name: </label>
+            <input id="name" [(ngModel)]="task.name" placeholder="name" formControlName="name"/>
+            <br>
+            <label for="description">Description: </label>
+            <input id="description" [(ngModel)]="task.description" placeholder="description" formControlName="description"/>
+            <br>
+            <label for="department">Department:</label>
+            <select id="department" [(ngModel)]="task.department" formControlName="department"></select>
+            <br>
+            <label for="deadline"> Deadline: </label>
+            <input id="deadline" [(ngModel)]="task.deadline" type="datetime-local" formControlName="deadline">
+            <br>
+        </div>
+    </form>
+</div>

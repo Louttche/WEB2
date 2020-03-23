@@ -6,4 +6,4 @@
     <!-- <a routerLink="/departments" routerLinkActive="active"> Departments </a> -->
 </nav>
 
-<router-outlet *ngIf="this.router.url != '/home'"></router-outlet>
+<router-outlet *ngIf="this.router.url != '/home' && this.router.url != '/'"></router-outlet>

@@ -1,24 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../task';
-import { TASKS } from '../mock-tasks';
+import { TaskService } from '../task.service';
+import { DepartmentService } from '../department.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-task-details',
   templateUrl: './task-details.component.html',
   styleUrls: ['./task-details.component.css']
 })
+
 export class TaskDetailsComponent implements OnInit {
-
+  task$: Observable<Task>;
   currentTask: Task;
-  tasks = TASKS;
+  tasks: Task[];
+  UpdateForm;
 
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private taskService: TaskService, 
+    private route: ActivatedRoute)
+    {
+      this.UpdateForm = this.formBuilder.group({
+        name: '', //[Validators.required]
+        description: '',
+        department: null,
+        employees: null,
+        deadline: null
+      });
+    }
 
   ngOnInit(): void {
-    //this.currentTask = this.GetTaskByID();
+    this.getTasks();
+    this.task$ = this.route.paramMap.pipe(switchMap((params: ParamMap) =>
+      this.taskService.getTask(params.get('id')))
+    );
+    this.task$.subscribe(value => this.currentTask = value);
   }
 
-  GetTaskByID(id: number): Task {
-    return this.tasks[this.tasks.findIndex(task => task.id === id)];
+  getTasks(): void{
+    this.taskService.getTasks().subscribe(tasks => tasks = tasks);
   }
 }

@@ -1,39 +1,74 @@
-<h2>My Tasks</h2>
-<ul class="tasks">
-   <li *ngFor='let task of tasks'
-        [class.selected]="task === selectedTask"
-        (click)="onSelect(task)">
-        <span class="badge">{{task.id}} </span> {{task.name | uppercase}}:
-        <span *ngIf='task === selectedTask'>
-            {{task.description}}
-        </span>
-   </li>
-</ul>
+<head>
+    <h2>My Tasks</h2>
+</head>
+<body>
+    <ul class="tasks">
+    <li *ngFor='let task of tasks'
+            [class.selected]="task === selectedTask"
+            (click)="onSelect(task)">
+            <span class="badge">{{task.id}} </span> {{task.name | uppercase}}:
+            <span *ngIf='task === selectedTask'>
+                {{task.description}}
+            </span>
+    </li>
+    </ul>
 
-<div *ngIf='selectedTask'>
-    <button (click)="onDelete(selectedTask)" [disabled]="!selectedTask"> Delete Task </button>
-    <button (click)="onUpdate(selectedTask, TaskInfoForm.value)" [disabled]="TaskInfoForm.invalid"> Update Task </button>
-</div>
-
-<form [formGroup]="TaskInfoForm"
-(ngSubmit)="onCreate(TaskInfoForm.value)">
-
-    <div>
-        <p>Fill in the form and press on the 'Create' button to add a new task, <br> Or the 'Update' button to update the information of the selected task!</p>
-
-        <label for="name">
-            Name
-        </label>
-        <input id="name" type="text" formControlName="name">
+    <div id="taskinfo" *ngIf='selectedTask'>
+        <a routerLink={{this.selectedTask.id}} routerLinkActive="active"> View more details </a>
+        <br><br>
+        <button (click)="onDelete(selectedTask)" [disabled]="!selectedTask"> Delete Task </button>
     </div>
-    <br>
-    <div>
-        <label for="description">
-            Description
-        </label>
-        <input id="description" type="text" formControlName="description">
-    </div>
-    <br>
 
-    <button type="submit" [disabled]="TaskInfoForm.invalid"> Create </button>
-</form>
+    <div id="newTask">
+        <br> <br>
+        <button onclick="'this.showNewTaskForm === !this.showNewTaskForm'"> Create a new task </button>
+
+        <form [formGroup]="TaskInfoForm"
+        (ngSubmit)="onCreate(TaskInfoForm.value)"
+        *ngIf="showNewTaskForm == true">
+
+            <div>
+                <p>Fill in the form and press on the 'Create' button to add a new task</p>
+
+                <label for="name">
+                    Name:
+                </label>
+                <input id="name" type="text" formControlName="name">
+            </div>
+            <br>
+            <div>
+                <label for="description">
+                    Description:
+                </label>
+                <input id="description" type="text" formControlName="description">
+            </div>
+            <br>
+            <div>
+                <label for="department">
+                    Department:
+                    <select id="departments" formControlName="department">
+                    </select>
+                </label>
+            </div>
+            <br>
+            <div>
+                <label for="employees">
+                    Assign To: (Can select multiple)
+                    <pre><select id="employees" multiple formControlName="employees">
+                        <option *ngFor="let e of this.employees"> {{e.name}} </option>
+                    </select></pre>
+                </label>
+            </div>
+            <br>
+            <div>
+                <label for="deadline">
+                    Deadline:
+                    <input id="deadline" type="datetime-local" formControlName="deadline">
+                </label>
+            </div>
+            <br>
+
+            <button type="submit" [disabled]="TaskInfoForm.invalid"> Create a new task</button>
+        </form>
+    </div>
+</body>

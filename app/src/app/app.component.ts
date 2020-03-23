@@ -7,7 +7,7 @@ import { RouterLink, Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Home';
+  title = 'WEB 2';
   router: Router;
   constructor(private r: Router){
     this.router = r;
