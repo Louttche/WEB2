@@ -12,6 +12,7 @@ import { Task } from '../task';
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css']
 })
+
 export class TasksComponent implements OnInit {
   tasks: Task[];
   employees = EMPLOYEES;
@@ -19,7 +20,6 @@ export class TasksComponent implements OnInit {
   selectedTask: Task;
   TaskInfoForm;
   show: boolean = false;
-  createButton:any;
 
   constructor(private formBuilder: FormBuilder, private taskService: TaskService/*, private departmentService: DepartmentService*/) {
       this.TaskInfoForm = this.formBuilder.group({
@@ -41,7 +41,9 @@ export class TasksComponent implements OnInit {
   }
 
   getTasks(): void{
-    this.taskService.getTasks().subscribe(tasks => this.tasks = tasks, err => console.log("error getting mock-tasks."));
+    //this.taskService.getTasks().subscribe(tasks => this.tasks = tasks, err => console.log("error getting mock-tasks."));    
+
+    this.taskService.getTasks().subscribe(tasks => this.tasks = tasks);
   }
 
   /*getDepartments(): void{
@@ -77,6 +79,8 @@ export class TasksComponent implements OnInit {
     this.show = !this.show;
 
     if (this.show)
-      this.createButton
+      document.getElementById("btn_New").textContent = 'Hide';
+    else
+    document.getElementById("btn_New").textContent = 'Create New Task';
   }
 }

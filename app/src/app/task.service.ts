@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Task } from './task';
-import { TASKS } from './mock-tasks';
+//import { TASKS } from './mock-tasks';
 import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,12 @@ import { map } from 'rxjs/operators';
 
 export class TaskService {
 
-  constructor() { }
+  taskJson = 'assets/tasks.json';
 
-  getTasks(): Observable<Task[]>{
-    return of(TASKS);
+  constructor(private http: HttpClient) { }
+
+  getTasks(){
+    return this.http.get<Task[]>(this.taskJson);
   }
 
   getTask(id: number | string){

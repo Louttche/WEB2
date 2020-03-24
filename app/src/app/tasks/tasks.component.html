@@ -6,10 +6,7 @@
     <li *ngFor='let task of tasks'
             [class.selected]="task === selectedTask"
             (click)="onSelect(task)">
-            <span class="badge">{{task.id}} </span> {{task.name | uppercase}}:
-            <span *ngIf='task === selectedTask'>
-                {{task.description}}
-            </span>
+            <span class="badge">{{task.id}} </span> {{task.name | uppercase}}
     </li>
     </ul>
 
@@ -21,11 +18,11 @@
 
     <div id="newTask">
         <br> <br>
-        <button onclick="'this.showNewTaskForm === !this.showNewTaskForm'"> Create a new task </button>
+        <button id="btn_New" (click)="toggle()"> Create a new task </button>
 
         <form [formGroup]="TaskInfoForm"
         (ngSubmit)="onCreate(TaskInfoForm.value)"
-        *ngIf="showNewTaskForm == true">
+        *ngIf="show === true">
 
             <div>
                 <p>Fill in the form and press on the 'Create' button to add a new task</p>
