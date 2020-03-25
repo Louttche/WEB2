@@ -12,4 +12,9 @@ export class AppComponent {
   constructor(private r: Router){
     this.router = r;
   }
+
+  ngDoCheck(): void {
+    if (this.router.url == null)
+      this.router.navigate(['dashboard']);
+  }
 }

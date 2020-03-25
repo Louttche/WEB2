@@ -30,7 +30,16 @@
             <label for="department">Department:</label>
             <select id="department" [(ngModel)]="task.department" formControlName="department"></select>
             <br>
-            <label for="deadline"> Deadline: </label>
+            <div>
+                <label for="employees">
+                    Assign To: (Can select multiple)
+                    <pre><select id="employees" multiple formControlName="employees">
+                        <option *ngFor="let e of this.employees"> {{e.name}} </option>
+                    </select></pre>
+                </label>
+            </div>
+            <br>
+            <label for="deadline"> To be done before: </label>
             <input id="deadline" [(ngModel)]="task.deadline" type="datetime-local" formControlName="deadline">
             <br>
         </div>

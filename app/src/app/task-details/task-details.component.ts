@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../task';
 import { TaskService } from '../task.service';
+import { EMPLOYEES } from '../mock-employees';
 import { DepartmentService } from '../department.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
@@ -14,10 +15,12 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 })
 
 export class TaskDetailsComponent implements OnInit {
+  UpdateForm;
+  
   task$: Observable<Task>;
   currentTask: Task;
   tasks: Task[];
-  UpdateForm;
+  employees = EMPLOYEES;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,5 +46,9 @@ export class TaskDetailsComponent implements OnInit {
 
   getTasks(): void{
     this.taskService.getTasks().subscribe(tasks => tasks = tasks);
+  }
+
+  updateEmployees(value){
+    console.log(value + " wow");
   }
 }

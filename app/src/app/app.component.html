@@ -1,10 +1,10 @@
 <h1> {{title}}</h1>
 <nav>
-    <a routerLink="/home" routerLinkActive="active"> Home </a>
+    <a routerLink="/dashboard" routerLinkActive="active"> Dashboard </a>
     <a routerLink="/tasks" routerLinkActive="active"> Tasks </a>
     <a routerLink="/employees" routerLinkActive="active"> Employees </a>
     <!-- <a routerLink="/departments" routerLinkActive="active"> Departments </a> -->
 </nav>
 <br>
 
-<router-outlet *ngIf="this.router.url != '/home' && this.router.url != '/'"></router-outlet>
+<router-outlet *ngIf="this.router.url != '/'"></router-outlet>
