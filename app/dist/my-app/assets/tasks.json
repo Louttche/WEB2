@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "name": "Testing",
+        "description": "Testing the products before shipment",
+        "department": null,
+        "employees": null,
+        "deadline": null 
+    },
+    {
+        "id": 2,
+        "name": "Communication",
+        "description": "Send emails and calls",
+        "department": null,
+        "employees": null,
+        "deadline": null 
+    },
+    {
+        "id": 3,
+        "name": "Interview Intakes",
+        "description": "Take care of incoming company interviews",
+        "department": null,
+        "employees": null,
+        "deadline": null 
+    },
+    {
+        "id": 4,
+        "name": "Coffee",
+        "description": "Get coffee to employees with a real task",
+        "department": null,
+        "employees": null,
+        "deadline": null 
+    }
+]
