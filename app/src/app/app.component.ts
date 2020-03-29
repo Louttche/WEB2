@@ -14,7 +14,6 @@ export class AppComponent {
   }
 
   ngDoCheck(): void {
-    if (this.router.url == null)
-      this.router.navigate(['dashboard']);
+    
   }
 }

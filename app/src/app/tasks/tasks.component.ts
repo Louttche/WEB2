@@ -4,8 +4,9 @@ import { TaskService } from '../task.service';
 //import { DepartmentService } from '../department.service';
 import { Department } from '../department';
 //import { EmployeeService } from '../employee.service';
-import { EMPLOYEES } from '../mock-employees';
+//import { EMPLOYEES } from '../mock-employees';
 import { Task } from '../task';
+import { Employee } from '../employee';
 
 @Component({
   selector: 'app-tasks',
@@ -15,7 +16,7 @@ import { Task } from '../task';
 
 export class TasksComponent implements OnInit {
   tasks: Task[];
-  employees = EMPLOYEES;
+  employees: Employee[];
   //departments: department[];
   selectedTask: Task;
   TaskInfoForm;

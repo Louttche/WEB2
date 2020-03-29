@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { EMPLOYEES } from '../mock-employees';
+//import { EMPLOYEES } from '../mock-employees';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Employee } from '../employee';
+import { EmployeeService } from '../employee.service';
 
 @Component({
   selector: 'app-employees',
@@ -10,21 +11,27 @@ import { Employee } from '../employee';
 })
 export class EmployeesComponent implements OnInit {
 
-  employees = EMPLOYEES;
+  employees: Employee[];
   EmployeeInfoForm;
   
   constructor(
-    private formBuilder: FormBuilder
-  ) {
+    private formBuilder: FormBuilder,
+    private employeeService: EmployeeService) {
     this.EmployeeInfoForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       description: ''
     });
   }
+
   ngOnInit(): void {
+    this.getEmployees();
   }
 
   selectedEmployee: Employee;
+
+  getEmployees(): void{
+    this.employeeService.getEmployees().subscribe(employees => this.employees = employees);
+  }
 
   onSelect(task: Employee): void {
     this.selectedEmployee = task;
@@ -37,7 +44,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   onCreate(employeeDetails) {
-    this.employees.push({name: employeeDetails.name, id: this.employees.length + 1});
+    this.employees.push({name: employeeDetails.name, id: this.employees.length + 1, department: null});
     this.EmployeeInfoForm.reset();
     this.sortEmployeeID();
   }
@@ -50,12 +57,5 @@ export class EmployeesComponent implements OnInit {
     this.selectedEmployee = null;
     this.sortEmployeeID();
   }
-
-  onUpdate(employee: Employee, employeeDetails){
-    var index = this.employees.findIndex(task => task === this.selectedEmployee);
-    this.employees[index].name = employeeDetails.name;
-    this.EmployeeInfoForm.reset();
-    this.sortEmployeeID();
-}
 
 }

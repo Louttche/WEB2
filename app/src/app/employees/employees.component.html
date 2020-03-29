@@ -8,16 +8,17 @@
 </ul>
 
 <div *ngIf='selectedEmployee'>
+    <a routerLink={{this.selectedEmployee.id}} routerLinkActive="active"> View more details </a>
+    <br>
+    <br>
     <button (click)="onDelete(selectedEmployee)" [disabled]="!selectedEmployee"> Delete Employee </button>
-    <button (click)="onUpdate(selectedEmployee, EmployeeInfoForm.value)" [disabled]="EmployeeInfoForm.invalid"> Update Employee </button>
 </div>
+
 
 <form [formGroup]="EmployeeInfoForm"
 (ngSubmit)="onCreate(EmployeeInfoForm.value)">
 
     <div>
-        <p>Fill in the form and press on the 'Create' button to add a new employee, <br> Or the 'Update' button to update the information of the selected employee!</p>
-
         <label for="name">
             Name
         </label>

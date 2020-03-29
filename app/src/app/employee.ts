@@ -1,5 +1,8 @@
+import { Department } from "./department";
+
 export class Employee
 {
     id: number;
     name: string;
+    department: Department;
 }

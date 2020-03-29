@@ -1,0 +1,23 @@
+<div *ngIf="employee$ | async as employee">
+    <h3>{{ employee.name }} Details</h3>
+    <div>
+      <label>Id: {{ employee.id }}</label>
+      <br>
+      <label>Name: {{ employee.name }}</label>
+      <br>
+      <label *ngIf="this.employee.department != null">Department: {{ employee.department.name }}</label>
+    </div>
+    <br>
+    
+    <h3>Make Changes</h3>
+    <form [formGroup]="UpdateForm">
+        <div>
+            <label for="name"> Name: </label>
+            <input id="name" [(ngModel)]="employee.name" placeholder="name" formControlName="name"/>
+            <br>
+            <label for="department">Department:</label>
+            <select id="department" [(ngModel)]="employee.department" formControlName="department"></select>
+            <br>
+        </div>
+    </form>
+</div>

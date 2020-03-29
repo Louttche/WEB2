@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../task';
+import { Employee } from '../employee';
 import { TaskService } from '../task.service';
-import { EMPLOYEES } from '../mock-employees';
+//import { EMPLOYEES } from '../mock-employees';
 import { DepartmentService } from '../department.service';
+import { EmployeeService } from '../employee.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-task-details',
@@ -20,12 +23,13 @@ export class TaskDetailsComponent implements OnInit {
   task$: Observable<Task>;
   currentTask: Task;
   tasks: Task[];
-  employees = EMPLOYEES;
+  employees: Employee[];
 
   constructor(
     private formBuilder: FormBuilder,
     private taskService: TaskService, 
-    private route: ActivatedRoute)
+    private route: ActivatedRoute,
+    private employeeService: EmployeeService)
     {
       this.UpdateForm = this.formBuilder.group({
         name: '', //[Validators.required]

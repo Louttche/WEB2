@@ -9,12 +9,14 @@ import { DepartmentsComponent } from './departments/departments.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 
 const appRoutes: Routes = [
-  {path: '', component: AppComponent},
+  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'tasks', component: TasksComponent},
   {path: 'employees', component: EmployeesComponent}, 
+  {path: 'employees/:id', component: EmployeeDetailsComponent},
   {path: 'tasks/:id', component: TaskDetailsComponent},
   {path: '**', component: PageNotFoundComponent}
 ]

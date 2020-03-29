@@ -15,6 +15,7 @@ import { TaskDetailsComponent } from './task-details/task-details.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DepartmentsComponent,
     TaskDetailsComponent,
     PageNotFoundComponent,
-    DashboardComponent
+    DashboardComponent,
+    EmployeeDetailsComponent
   ],
 
   imports: [
