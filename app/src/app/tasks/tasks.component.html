@@ -2,8 +2,11 @@
     <h2>My Tasks</h2>
 </head>
 <body>
+    <div id="search-task">
+        <input type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search for a task">
+    </div>
     <ul class="tasks">
-    <li *ngFor='let task of tasks'
+    <li *ngFor='let task of tasks | filter:searchText'
             [class.selected]="task === selectedTask"
             (click)="onSelect(task)">
             <span class="badge">{{task.id}} </span> {{task.name | uppercase}}

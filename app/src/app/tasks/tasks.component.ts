@@ -17,6 +17,7 @@ import { Employee } from '../employee';
 export class TasksComponent implements OnInit {
   tasks: Task[];
   employees: Employee[];
+  searchText: string;
   //departments: department[];
   selectedTask: Task;
   TaskInfoForm;

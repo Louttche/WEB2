@@ -1,7 +1,23 @@
 <h3> Dashboard </h3>
 
-<div>
-    Most popular Task: <br>
-    Most popular Departments: <br>
-    Employee Of The Month:
-</div>
+<body>
+
+    <div id="search-dashboard">
+        <input type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search">
+        <label for="dashboardfilter"> Sort by: </label>
+        <select id="dashboardfilter">
+            <option value="all"> All </option>
+            <option value="employee"> Employee </option>
+            <option value="department"> Department </option>
+        </select>
+    </div>
+
+    <br>
+    <div id= "employeeList" *ngFor="let e of this.employees | filter: searchText">
+        <label> {{e.name}} </label>
+    </div>
+    <br>
+    <div id="departmentList" *ngFor="let d of this.tasks | filter: searchText">
+        <label> {{d.name}} </label>
+    </div>
+</body>

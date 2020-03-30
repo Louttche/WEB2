@@ -4,7 +4,7 @@ import { TaskService } from '../task.service';
 import { Department } from '../department';
 import { DepartmentService } from '../department.service';
 import { Employee } from '../employee';
-//import { EmployeeService } from '../employee.service';
+import { EmployeeService } from '../employee.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,27 +12,33 @@ import { Employee } from '../employee';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+  searchText: string;
   tasks: Task[];
-  popularTask: Task;
-  //departments: Department[];
-  //employees: Employee[];
+  departments: Department[];
+  employees: Employee[];
 
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService, private employeeService: EmployeeService, private departmentService: DepartmentService) { }
 
   ngOnInit(): void {
     this.getTasks();
-  }
-
-  ngDoCheck(): void {
-    //this.popularTask = this.getMostPopularTask();
+    this.getEmployees();
+    this.getDepartments();
   }
 
   getTasks(){
     this.taskService.getTasks().subscribe(tasks => this.tasks = tasks);
   }
 
-  getMostPopularTask(): Task{
+  getEmployees(){
+    this.employeeService.getEmployees().subscribe(employees => this.employees = employees);
+  }
+
+  getDepartments(){
+    this.departmentService.getDepartmentsDB().subscribe(departments => this.departments = departments);
+  }
+
+  //Extra Dashboard stuff
+  /*getMostPopularTask(): Task{
     let mostPopular: Task = null;
 
     if (this.tasks != null){
@@ -46,7 +52,7 @@ export class DashboardComponent implements OnInit {
 
     return mostPopular;
 
-  }
+  }*/
 
   /*getMostPopularDepartment(): Department{
     let mostPopular: Department = null;
